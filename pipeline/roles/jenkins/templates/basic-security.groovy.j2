@@ -1,0 +1,24 @@
+#!groovy
+
+import jenkins.model.*
+import hudson.security.*
+import jenkins.install.InstallState
+
+def instance = Jenkins.getInstance()
+
+println "--> creating local user '{{JK_USR}}'"
+
+def hudsonRealm = new HudsonPrivateSecurityRealm(false)
+hudsonRealm.createAccount('{{JK_USR}}','{{JK_PASSWD}}')
+instance.setSecurityRealm(hudsonRealm)
+
+if (!instance.installState.isSetupComplete()) {
+  println '--> Neutering SetupWizard'
+  InstallState.INITIAL_SETUP_COMPLETED.initializeState()
+}
+
+def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
+// strategy.setAllowAnonymousRead(false)
+strategy.add(Jenkins.ADMINISTER, '{{JK_USR}}')
+instance.setAuthorizationStrategy(strategy)
+instance.save()

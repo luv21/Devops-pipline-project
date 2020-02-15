@@ -1,7 +1,7 @@
 {
   "name": "pipeline",
   "version": "1.0.0",
-  "description": "Template for your hw2.",
+  "description": "Build stage of DevOps Project",
   "main": "index.js",
   "bin": "index.js",
   "scripts": {},

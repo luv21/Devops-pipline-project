@@ -1,0 +1,5 @@
+jenkins_plugins:
+  - name: role-strategy
+    version: "2.16"
+  - name: matrix-auth
+    version: "2.2"

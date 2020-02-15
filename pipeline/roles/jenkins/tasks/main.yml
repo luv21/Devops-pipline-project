@@ -1,0 +1,100 @@
+---
+- name: Install openjdk-8-jdk
+  apt: 
+    name: openjdk-8-jdk
+    state: present
+  become: true
+
+- name: Add an Apt signing key, uses whichever key is at the URL
+  apt_key:
+    url: https://pkg.jenkins.io/debian/jenkins.io.key
+    state: present
+  become: true
+
+- name: Add jenkins repository to the resource list
+  lineinfile:
+    path: /etc/apt/sources.list.d/jenkins.list
+    line: deb http://pkg.jenkins.io/debian-stable binary/
+    create: yes
+  become: true
+
+- name: Update cache
+  apt:
+    update_cache: yes
+  become: true
+
+- name: Install jenkins
+  apt:
+    name: jenkins
+    state: latest
+  become: true
+
+- name: Allow all access to port 9000
+  ufw:
+    rule: allow
+    port: '9000'
+  become: true
+
+- name: Create jenkins folder in /etc/default
+  become: yes
+  file:
+    path: /etc/default/jenkins
+    state: touch
+
+- name: Create init.groovy.d to skip the setup page
+  become: yes
+  become_user: jenkins
+  file:
+    path: /var/lib/jenkins/init.groovy.d
+    state: directory
+
+- name: Push jenkins file to /etc/default
+  become: yes
+  template:
+    src: jenkins.j2
+    dest: /etc/default/jenkins
+
+- name: Push basic basic-security.groovy file
+  become: yes
+  become_user: jenkins
+  template:
+    src: basic-security.groovy.j2
+    dest: /var/lib/jenkins/init.groovy.d/basic-security.groovy
+
+- name: Restart jenkins service
+  become: yes
+  systemd:
+    name: jenkins
+    state: restarted
+
+- name: cURL request on Port 9000
+  uri:
+    url: http://192.168.33.80:9000
+    user: "{{JK_USR}}"
+    password: "{{JK_PASSWD}}"
+    force_basic_auth: yes
+  register: httpResponse
+  until: httpResponse.status == 200
+  retries: 12
+  delay: 5
+
+- name: Response of cURL request
+  debug:
+    msg: '{{httpResponse.status}}'
+
+- name: Install role plugin in jenkins
+  become: yes
+  jenkins_plugin:
+    name: "{{item.name}}"
+    version: "{{item.version}}"
+    url_username: "{{JK_USR}}"
+    url_password: "{{JK_PASSWD}}"
+    url: http://192.168.33.80:9000
+  with_items:
+    - "{{jenkins_plugins}}"
+
+- name: restart jenkins
+  become: yes
+  systemd:
+    name: jenkins
+    state: restarted
