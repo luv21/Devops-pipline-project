@@ -29,11 +29,11 @@ exports.builder = yargs => {
             default: 'admin',
             nargs: 1
         },
-        vaultpass: {
+        vaultfilePath: {
             alias: 'vp',
-            describe: 'Password for ansible-vault',
+            describe: 'Password file  for ansible-vault',
             type: 'string',
-            default: 'jenkins',
+            default: 'pipeline/password/jenkins',
             nargs: 1
         }
     });
@@ -41,12 +41,12 @@ exports.builder = yargs => {
 
 
 exports.handler = async argv => {
-    const { privateKey, username, password, vaultpass } = argv;
+    const { privateKey, username, password, vaultfilePath } = argv;
 
     (async () => {
 
         await run( privateKey );
-        await jenkins_setup('pipeline/playbook.yml', 'pipeline/inventory.ini', username, password, vaultpass);
+        await jenkins_setup('pipeline/playbook.yml', 'pipeline/inventory.ini', username, password, vaultfilePath);
 
     })();
 
@@ -61,7 +61,7 @@ async function run(privateKey) {
     if( result.error ) { console.log(result.error); process.exit( result.status ); }
 
     console.log(chalk.blueBright('Provisioning jenkins server...'));
-    result = child.spawnSync(`bakerx`, `run jenkins-srv bionic --ip 192.168.33.80`.split(' '), {shell:true, stdio: 'inherit'} );
+    result = child.spawnSync(`bakerx`, `run jenkins-srv bionic --ip 192.168.33.20`.split(' '), {shell:true, stdio: 'inherit'} );
     if( result.error ) { console.log(result.error); process.exit( result.status ); }
 
     console.log(chalk.blueBright('Installing privateKey on configuration server'));
@@ -75,15 +75,14 @@ async function run(privateKey) {
 
 }
 
-async function jenkins_setup(file, inventory, username, password, vaultpass) {
-
+async function jenkins_setup(file, inventory, username, password, vaultfilePath)
     // the paths should be from root of cm directory
     // Transforming path of the files in host to the path in VM's shared folder
     let filePath = '/bakerx/'+ file;
     let inventoryPath = '/bakerx/' +inventory;	
 
     console.log(chalk.blueBright('Running ansible script...'));
-    let result = sshSync(`/bakerx/pipeline/run-ansible.sh ${filePath} ${inventoryPath} ${username} ${password} ${vaultpass}`, 'vagrant@192.168.33.10');
+    let result = sshSync(`/bakerx/pipeline/run-ansible.sh ${filePath} ${inventoryPath} ${username} ${password} ${vaultfilePath}`, 'vagrant@192.168.33.10');
     if( result.error ) { process.exit( result.status ); }
 
 }
