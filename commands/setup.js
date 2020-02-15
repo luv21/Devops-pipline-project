@@ -14,18 +14,39 @@ exports.builder = yargs => {
         privateKey: {
             describe: 'Install the provided private key on the configuration server',
             type: 'string'
+        },
+        username: {
+            alias: 'u',
+            describe: 'Username',
+            type: 'string',
+            default: 'admin',
+            nargs: 1
+        },
+        password: {
+            alias: 'p',
+            describe: 'Password',
+            type: 'string',
+            default: 'admin',
+            nargs: 1
+        },
+        vaultpass: {
+            alias: 'vp',
+            describe: 'Password for ansible-vault',
+            type: 'string',
+            default: 'jenkins',
+            nargs: 1
         }
     });
 };
 
 
 exports.handler = async argv => {
-    const { privateKey } = argv;
+    const { privateKey, username, password, vaultpass } = argv;
 
     (async () => {
 
-        //await run( privateKey );
-        await jenkins_setup('cm/playbook.yml', 'cm/inventory.ini');
+        await run( privateKey );
+        await jenkins_setup('pipeline/playbook.yml', 'pipeline/inventory.ini', username, password, vaultpass);
 
     })();
 
@@ -45,16 +66,16 @@ async function run(privateKey) {
 
     console.log(chalk.blueBright('Installing privateKey on configuration server'));
     let identifyFile = privateKey || path.join(os.homedir(), '.bakerx', 'insecure_private_key');
-    result = scpSync (identifyFile, 'vagrant@192.168.33.10:/home/vagrant/.ssh/mm_rsa');
+    result = scpSync (identifyFile, 'vagrant@192.168.33.10:/home/vagrant/.ssh/jk_rsa');
     if( result.error ) { console.log(result.error); process.exit( result.status ); }
 
     console.log(chalk.blueBright('Running init script...'));
-    result = sshSync('/bakerx/cm/server-init.sh', 'vagrant@192.168.33.10');
+    result = sshSync('/bakerx/pipeline/server-init.sh', 'vagrant@192.168.33.10');
     if( result.error ) { console.log(result.error); process.exit( result.status ); }
 
 }
 
-async function jenkins_setup(file, inventory) {
+async function jenkins_setup(file, inventory, username, password, vaultpass) {
 
     // the paths should be from root of cm directory
     // Transforming path of the files in host to the path in VM's shared folder
@@ -62,7 +83,7 @@ async function jenkins_setup(file, inventory) {
     let inventoryPath = '/bakerx/' +inventory;	
 
     console.log(chalk.blueBright('Running ansible script...'));
-    let result = sshSync(`/bakerx/cm/run-ansible.sh ${filePath} ${inventoryPath}`, 'vagrant@192.168.33.10');
+    let result = sshSync(`/bakerx/pipeline/run-ansible.sh ${filePath} ${inventoryPath} ${username} ${password} ${vaultpass}`, 'vagrant@192.168.33.10');
     if( result.error ) { process.exit( result.status ); }
 
 }
