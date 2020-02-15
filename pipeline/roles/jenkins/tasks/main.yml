@@ -54,7 +54,7 @@
     src: jenkins.j2
     dest: /etc/default/jenkins
 
-- name: Push basic basic-security.groovy file
+- name: Push basic-security.groovy file
   become: yes
   become_user: jenkins
   template:
@@ -69,7 +69,7 @@
 
 - name: cURL request on Port 9000
   uri:
-    url: http://192.168.33.80:9000
+    url: http://192.168.33.20:9000
     user: "{{JK_USR}}"
     password: "{{JK_PASSWD}}"
     force_basic_auth: yes
@@ -89,7 +89,7 @@
     version: "{{item.version}}"
     url_username: "{{JK_USR}}"
     url_password: "{{JK_PASSWD}}"
-    url: http://192.168.33.80:9000
+    url: http://192.168.33.20:9000
   with_items:
     - "{{jenkins_plugins}}"
 
