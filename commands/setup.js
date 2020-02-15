@@ -2,12 +2,13 @@ const child = require('child_process');
 const chalk = require('chalk');
 const path = require('path');
 const os = require('os');
+const fs = require('fs');
 
 const scpSync = require('../lib/scp');
 const sshSync = require('../lib/ssh');
 
 exports.command = 'setup';
-exports.desc = 'Provision and configure the configuration server';
+exports.desc = 'Configures Jenkins and build Environment';
 exports.builder = yargs => {
     yargs.options({
         privateKey: {
@@ -23,7 +24,8 @@ exports.handler = async argv => {
 
     (async () => {
 
-        await run( privateKey );
+        //await run( privateKey );
+        await jenkins_setup('cm/playbook.yml', 'cm/inventory.ini');
 
     })();
 
@@ -37,8 +39,8 @@ async function run(privateKey) {
     let result = child.spawnSync(`bakerx`, `run ansible-srv bionic --ip 192.168.33.10 --sync`.split(' '), {shell:true, stdio: 'inherit'} );
     if( result.error ) { console.log(result.error); process.exit( result.status ); }
 
-    console.log(chalk.blueBright('Provisioning mattermost server...'));
-    result = child.spawnSync(`bakerx`, `run mattermost-srv bionic --ip 192.168.33.80`.split(' '), {shell:true, stdio: 'inherit'} );
+    console.log(chalk.blueBright('Provisioning jenkins server...'));
+    result = child.spawnSync(`bakerx`, `run jenkins-srv bionic --ip 192.168.33.80`.split(' '), {shell:true, stdio: 'inherit'} );
     if( result.error ) { console.log(result.error); process.exit( result.status ); }
 
     console.log(chalk.blueBright('Installing privateKey on configuration server'));
@@ -50,6 +52,17 @@ async function run(privateKey) {
     result = sshSync('/bakerx/cm/server-init.sh', 'vagrant@192.168.33.10');
     if( result.error ) { console.log(result.error); process.exit( result.status ); }
 
+}
 
+async function jenkins_setup(file, inventory) {
+
+    // the paths should be from root of cm directory
+    // Transforming path of the files in host to the path in VM's shared folder
+    let filePath = '/bakerx/'+ file;
+    let inventoryPath = '/bakerx/' +inventory;	
+
+    console.log(chalk.blueBright('Running ansible script...'));
+    let result = sshSync(`/bakerx/cm/run-ansible.sh ${filePath} ${inventoryPath}`, 'vagrant@192.168.33.10');
+    if( result.error ) { process.exit( result.status ); }
 
 }
