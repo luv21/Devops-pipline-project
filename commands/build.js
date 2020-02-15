@@ -1,12 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
-
 const sshSync = require('../lib/ssh');
 
 
-exports.command = 'playbook <file> <inventory>';
-exports.desc = 'Run provided playbook with given inventory';
+// exports.command = 'build <file> <inventory>';
+exports.command = 'build <job_name>';
+exports.desc = 'Trigger a build job (named checkbox.io), wait for output, and print build log';
 exports.builder = yargs => {
     yargs.options({
     });
