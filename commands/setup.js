@@ -75,12 +75,12 @@ async function run(privateKey) {
 
 }
 
-async function jenkins_setup(file, inventory, username, password, vaultfilePath)
+async function jenkins_setup(file, inventory, username, password, vaultfilePath) {
     // the paths should be from root of cm directory
     // Transforming path of the files in host to the path in VM's shared folder
     let filePath = '/bakerx/'+ file;
     let inventoryPath = '/bakerx/' +inventory;	
-
+    vaultfilePath = '/bakerx/'+ vaultfilePath;
     console.log(chalk.blueBright('Running ansible script...'));
     let result = sshSync(`/bakerx/pipeline/run-ansible.sh ${filePath} ${inventoryPath} ${username} ${password} ${vaultfilePath}`, 'vagrant@192.168.33.10');
     if( result.error ) { process.exit( result.status ); }
