@@ -60,6 +60,8 @@
   template:
     src: basic-security.groovy.j2
     dest: /var/lib/jenkins/init.groovy.d/basic-security.groovy
+    mode: 0755
+    owner: jenkins
 
 - name: Restart jenkins service
   become: yes
