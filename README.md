@@ -80,9 +80,9 @@ We have provided a CLI command `pipeline setup` which performs the following tas
 * Configuring Jenkins setup, authentication
 * Using ansible vault password file
 
-![Phase1](/Images/initial.PNG)
+![Phase1](/Images/initial.png)
 
-![Task progress](/Images/phase1.PNG)
+![Task progress](/Images/phase1.png)
 
 ![Final](/Images/final.PNG)
 
