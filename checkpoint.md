@@ -1,11 +1,10 @@
-# Checkpoint-1 
+## Checkpoint-1 
 
-<br/><br/>
+<p></p>
 
-# User Stories Checkpoint-1 
+## User Stories Checkpoint-1 
 
-<br/><br/>
-
+<p></p>
 
 | Milestone | Issue Number | Issue Name                                                | Task                                                                  | Created/Updated | Estimate | Assignees         | Completed   |
 |-----------|--------------|-----------------------------------------------------------|-----------------------------------------------------------------------|-----------------|----------|-------------------|-------------|
@@ -61,7 +60,7 @@
 <br/><br/>
 
 
-# User Stories Checkpoint-2
+## User Stories Checkpoint-2
 
 
 

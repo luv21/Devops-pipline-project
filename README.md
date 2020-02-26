@@ -88,7 +88,7 @@ The steps that we performed in the Checkpoint-2  are:
 
 
 
-
+[checkpoint documentation](/checkpoint.md)
 
 
 
