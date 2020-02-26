@@ -1,0 +1,5 @@
+- name: Install nodejs
+  become: yes
+  apt: 
+    name: nodejs
+    state: latest

@@ -8,4 +8,6 @@
     - ping
     - update
     - jenkins
+    - mongo_install
     - mongo_config
+    - nodejs
