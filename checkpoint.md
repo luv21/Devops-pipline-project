@@ -1,8 +1,10 @@
 # Checkpoint-1 
 
-
+<br/><br/>
 
 # User Stories Checkpoint-1 
+
+<br/><br/>
 
 
 | Milestone | Issue Number | Issue Name                                                | Task                                                                  | Created/Updated | Estimate | Assignees         | Completed   |
@@ -34,8 +36,7 @@
 |           |              |                                                           |                                                                       |                 |          |                   |             |
 | 2         | 9            | creating nodejs                                           | Installing nodejs and other variable dependencies like nginx          | 19 Feb 2020     | 1        |                   | In Progress |
 
-<p></p>
-
+<br/><br/>
 
 
 #### Sprint Summary Planning Checkpoint-1;
@@ -45,19 +46,19 @@
 * Using ansible vault password file
 
 
-<p></p>
+<br/><br/>
 
 ![Phase1](/Images/initial.png)
 
-<p></p>
+<br/><br/>
 
 ![Task progress](/Images/phase1.png)
 
-<p></p>
+<br/><br/>
 
 ![Final](/Images/final.PNG)
 
-<p></p>
+<br/><br/>
 
 
 # User Stories Checkpoint-2
@@ -113,12 +114,11 @@
 
 * Creating documentation for Checkpoint-2
 
-<p></p>
-
+<br/><br/>
 
 ![Phase1](/Images/cp1.png)
 
-<p></p>
+<br/><br/>
 
 ![Final](/Images/cp2.png)
 
