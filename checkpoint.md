@@ -1,8 +1,9 @@
-# Checkpoint-1
+# Checkpoint-1 
 
 
 
 # User Stories Checkpoint-1 
+
 
 | Milestone | Issue Number | Issue Name                                                | Task                                                                  | Created/Updated | Estimate | Assignees         | Completed   |
 |-----------|--------------|-----------------------------------------------------------|-----------------------------------------------------------------------|-----------------|----------|-------------------|-------------|
@@ -33,6 +34,8 @@
 |           |              |                                                           |                                                                       |                 |          |                   |             |
 | 2         | 9            | creating nodejs                                           | Installing nodejs and other variable dependencies like nginx          | 19 Feb 2020     | 1        |                   | In Progress |
 
+<p></p>
+
 
 
 #### Sprint Summary Planning Checkpoint-1;
@@ -41,14 +44,25 @@
 * Configuring Jenkins setup, authentication
 * Using ansible vault password file
 
+
+<p></p>
+
 ![Phase1](/Images/initial.png)
+
+<p></p>
 
 ![Task progress](/Images/phase1.png)
 
+<p></p>
+
 ![Final](/Images/final.PNG)
+
+<p></p>
 
 
 # User Stories Checkpoint-2
+
+
 
 
 | Milestone | Issue Number | Issue Name                                                | Task                                                           | Created/Updated | Estimate | Assignees         | Completed   |
@@ -94,10 +108,17 @@
 #### Sprint Summary Planning Checkpoint-2;
 
 * Setting up necessary dependencies like nodejs and mongodb
+
 * Setting up the mongo-user and the password
+
 * Creating documentation for Checkpoint-2
 
+<p></p>
+
+
 ![Phase1](/Images/cp1.png)
+
+<p></p>
 
 ![Final](/Images/cp2.png)
 
