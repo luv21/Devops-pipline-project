@@ -1,4 +1,4 @@
-# Checkpoint 1
+# Milestone 1
 
 ## Process flow and Software practices
 
@@ -85,55 +85,6 @@ We have provided a CLI command `pipeline setup` which performs the following tas
 ![Task progress](/Images/phase1.png)
 
 ![Final](/Images/final.PNG)
-
-
-# Checkpoint-2
-
-## Process flow and Software practices
-
-In this milestone we created the build environment for checkbox.io. The production site has dependencies on nginx, node, monogodb, and additional environmental variable dependencies. In this checkpoint we implemented a subset of these dependencies.
-
-
-The steps that we performed in the Checkpoint-2  are:
-
-* Installed Mongodb  with configuration enhancement. Settings up Mongodb database for configuring build environment.
-
-* Created mongo user with password and readWrite role. We also defined the port for Mongodb
-
-* Installed nodejs and other variable dependencies like nginx.
-
-
-# Scrum Meeting 2 - Date: 02/20/2020
-
-### Luv Khurana
-
-#### Tasks:
-
-* Installed nodejs
-* Update documentation and Readme
-
-### Venkata Sai
-
-#### Tasks
-
-* Created mongo user with password and readWrite role
-* Changing ports for Mongodb
-
-
-
-### Jayesh
-
-#### Tasks  
-
-* Installed Mongodb and other environment variables.
-* Updated source list and enabling Mongodb services.
-
-
-
-
-
-
-
 
 
 
