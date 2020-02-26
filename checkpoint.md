@@ -2,7 +2,7 @@
 
 
 
-# User Stories
+# User Stories Checkpoint-1 
 
 | Milestone | Issue Number | Issue Name                                                | Task                                                                  | Created/Updated | Estimate | Assignees         | Completed   |
 |-----------|--------------|-----------------------------------------------------------|-----------------------------------------------------------------------|-----------------|----------|-------------------|-------------|
@@ -34,7 +34,8 @@
 | 2         | 9            | creating nodejs                                           | Installing nodejs and other variable dependencies like nginx          | 19 Feb 2020     | 1        |                   | In Progress |
 
 
-#### Sprint Summary Planning;
+
+#### Sprint Summary Planning Checkpoint-1;
 
 * Setting up Infrastructure
 * Configuring Jenkins setup, authentication
@@ -45,6 +46,60 @@
 ![Task progress](/Images/phase1.png)
 
 ![Final](/Images/final.PNG)
+
+
+# User Stories Checkpoint-2
+
+
+| Milestone | Issue Number | Issue Name                                                | Task                                                           | Created/Updated | Estimate | Assignees         | Completed   |
+|-----------|--------------|-----------------------------------------------------------|----------------------------------------------------------------|-----------------|----------|-------------------|-------------|
+|           |              |                                                           |                                                                |                 |          |                   |             |
+| 2         | 7            | Installing Mongodb - configuration enhancement            | Settings up Mongodb database for configuring build environment | 19 Feb 2020     | 1        | sjbondu           | completed   |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+| 2         | 8            | Create mongo user with password and readWrite role. Build | Create mongo user with password and readWrite role.            | 19 Feb 2020     | 2        | vpmaddur          | completed   |
+|           |              |                                                           | Define mongo port                                              |                 |          |                   |             |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+| 2         | 9            | creating nodejs                                           | Installing nodejs and other variable dependencies like nginx   | 19 Feb 2020     | 1        | lkhuran           | completed   |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+| 2         | 11           | checkpoint documentation                                  | Create and update the checkpoint-2 documentation               | 26 Feb 2020     | 1        | lkhuran           | completed   |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+| 2         | 12           | Configure build environment                               | Configure the environment to run on the same build server      | 26 Feb 2020     | 1        | vpmaddur          | completed   |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+| 2         | 13           | Automate build environment                                | construct build environment automatically                      | 26 Feb 2020     | 1        | lkhuran, sjbondu  | completed   |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+| 3         | 12           | clone repo and install modules                            | clone repo                                                     | 26 Feb 2020     | 2        | vpmaddur          | In progress |
+|           |              |                                                           | Install npm packages                                           |                 |          |                   |             |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+| 3         | 13           | start mongodb and server.js                               | start mongodb                                                  | 26 Feb 2020     | 2        | lkhuran           | In progress |
+|           |              |                                                           | start server.js                                                |                 |          |                   |             |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+| 3         | 14           | passing npm test                                          | validating tests                                               | 26 Feb 2020     | 1        | sjbondu           | In progress |
+|           |              |                                                           |                                                                |                 |          |                   |             |
+| 3         | 15           | tear down services                                        | tearing down services                                          | 26 Feb 2020     | 1        | lkhuran, vpmaddur | In progress |
+
+
+
+
+
+
+
+
+
+
+
+#### Sprint Summary Planning Checkpoint-2;
+
+* Setting up necessary dependencies like nodejs and mongodb
+* Setting up the mongo-user and the password
+* Creating documentation for Checkpoint-2
+
+![Phase1](/Images/cp1.png)
+
+![Final](/Images/cp2.png)
 
 
 
