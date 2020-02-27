@@ -7,7 +7,7 @@ const fs = require('fs');
 const scpSync = require('../lib/scp');
 const sshSync = require('../lib/ssh');
 
-exports.command = 'setup';
+exports.command = 'setup <file> <inventory>';
 exports.desc = 'Configures Jenkins and build Environment';
 exports.builder = yargs => {
     yargs.options({
@@ -15,53 +15,45 @@ exports.builder = yargs => {
             describe: 'Install the provided private key on the configuration server',
             type: 'string'
         },
-        jenkinsUsername: {
-            alias: 'ju',
-            describe: 'Username',
-            type: 'string',
-            default: 'admin',
-            nargs: 1
-        },
-        jenkinsPassword: {
-            alias: 'jp',
-            describe: 'Password',
-            type: 'string',
-            default: 'admin',
-            nargs: 1
-        },
         vaultfilePath: {
             alias: 'vp',
             describe: 'Password file  for ansible-vault',
             type: 'string',
             default: 'pipeline/password/jenkins',
             nargs: 1
-        },
-        mongoUsername: {
-            alias: 'mu',
-            describe: 'Mongo Username',
+	},
+        file: {
+            alias: 'f',
+            describe: 'Inventory file for setup',
             type: 'string',
-            default: 'mongo_user',
+            default: 'pipeline/playbook.yml',
             nargs: 1
         },
-        mongoPassword: {
-            alias: 'mp',
-            describe: 'Password file  for ansible-vault',
+        inventory: {
+            alias: 'i',
+            describe: 'Inventory file for setup',
             type: 'string',
-            default: 'mongo_password',
+            default: 'pipeline/inventory.ini',
             nargs: 1
-        }
+        },
 
     });
 };
 
 
 exports.handler = async argv => {
-    const { privateKey, jenkinsUsername, jenkinsPassword, vaultfilePath, mongoUsername, mongoPassword } = argv;
+    const { privateKey, vaultfilePath, file, inventory } = argv;
 
     (async () => {
 
         await run( privateKey );
-        await jenkins_setup('pipeline/playbook.yml', 'pipeline/inventory.ini', jenkinsUsername, jenkinsPassword, vaultfilePath, mongoUsername, mongoPassword);
+        if (fs.existsSync(path.resolve(file)) && fs.existsSync(path.resolve(inventory))) {
+            await jenkins_setup(file, inventory, vaultfilePath);
+        }
+
+        else {
+            console.error(`File or inventory don't exist. Make sure to provide path from root of cm directory`);
+        }
 
     })();
 
@@ -91,13 +83,12 @@ async function run(privateKey) {
 }
 
 async function jenkins_setup(file, inventory, jenkinsUsername, jenkinsPassword, vaultfilePath, mongoUsername, mongoPassword) {
-    // the paths should be from root of cm directory
+    // the paths should be from root of pipeline directory
     // Transforming path of the files in host to the path in VM's shared folder
     let filePath = '/bakerx/'+ file;
     let inventoryPath = '/bakerx/' +inventory;	
     vaultfilePath = '/bakerx/'+ vaultfilePath;
     console.log(chalk.blueBright('Running ansible script...'));
-    let result = sshSync(`/bakerx/pipeline/run-ansible.sh ${filePath} ${inventoryPath} ${jenkinsUsername} ${jenkinsPassword} ${vaultfilePath} ${mongoUsername} ${mongoPassword}`, 'vagrant@192.168.33.10');
+    let result = sshSync(`/bakerx/pipeline/run-ansible.sh ${filePath} ${inventoryPath} ${vaultfilePath}`, 'vagrant@192.168.33.10');
     if( result.error ) { process.exit( result.status ); }
-
 }
