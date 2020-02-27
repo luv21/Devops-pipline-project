@@ -6,7 +6,7 @@ NAME=jenkins
 # arguments to pass to java
 
 # Allow graphs etc. to work even when an X server is present
-JAVA_ARGS="-Djenkins.install.runSetupWizard=false -Djava.awt.headless=true"
+JAVA_ARGS="-Djenkins.install.runSetupWizard=false -Djava.awt.headless=true -Dhudson.security.csrf.DefaultCrumbIssuer.EXCLUDE_SESSION_ID=true"
 
 #JAVA_ARGS="-Xmx256m"
 

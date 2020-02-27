@@ -5,10 +5,11 @@
 
 - hosts: jenkins
   roles:
-    - ping
-    - update
-    - environment
+    # - ping
+    # - update
+    # - environment
     - jenkins
-    - mongo_install
-    - mongo_config
-    - nodejs
+    # - mongo_install
+    # - mongo_config
+    # - nodejs
+    - builder

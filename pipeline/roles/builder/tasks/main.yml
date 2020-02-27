@@ -1,0 +1,53 @@
+---
+  - name: Installing pip
+    become: yes
+    apt:
+      name: python3-pip
+      state: present
+
+  - name: Installing jenkins job builder
+    become: yes
+    apt:
+      name: python3-jenkins-job-builder
+      state: present
+
+  - name: create a jenkins_jobs directory
+    become: yes
+    file:
+      path: /etc/jenkins_jobs
+      state: directory
+      mode: '0755'
+
+  - name: push the jenkins_jobs.ini into the folder
+    become: yes
+    template:
+      src: jenkins_jobs.ini.j2
+      dest: /etc/jenkins_jobs/jenkins_jobs.ini
+      mode: 0755
+      owner: jenkins
+
+  - name: create a jenkins_jobs directory
+    become: yes
+    file:
+      path: /home/vagrant/jobs
+      state: directory
+      mode: '0755'
+
+  - name: push the yml file
+    become: yes
+    template:
+      src: hello.yml.j2
+      dest: /home/vagrant/jobs/hello.yml
+      mode: 0755
+      owner: jenkins
+
+  
+
+
+
+
+
+  
+
+
+
