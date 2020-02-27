@@ -1,27 +1,10 @@
 ---
-- name: Adding environmental variables in bashrc
-  become: yes
-  lineinfile:
-    path: "{{ansible_env.HOME}}/.bashrc"
-    insertbefore: 'BOF'
-    line: export "{{item}}"
-    state: present
-  with_items:
-    - APP_PORT=3002
-    - MONGO_PORT=27012
-    - MONGO_USER="{{MO_USR}}"
-    - MONGO_PASSWORD="{{MO_PASSWD}}"
-    - MONGO_IP=localhost
-
-- name: Gathering facts again using setup to load the new environmental variables into ansible
-  setup:
-
 - name: Changing mongo port to 27012
   become: yes
   replace:
     path: /etc/mongod.conf
     regexp: '27017'
-    replace: "{{ansible_env.MONGO_PORT}}"
+    replace: '27012'
 
 - name: Restarting mongod service after changing the port to 27012
   become: yes
@@ -43,11 +26,10 @@
 
 - name: Creating a user in mongodb
   mongodb_user:
-    login_host: "{{ansible_env.MONGO_IP}}"
-    login_port: "{{ansible_env.MONGO_PORT}}"
+    login_port: '27012'
     database: admin
-    name: "{{ansible_env.MONGO_USER}}"
-    password: "{{ansible_env.MONGO_PASSWORD}}"
+    name: "{{MO_USR}}"
+    password: "{{MO_PASSWD}}"
     roles: readWrite
     state: present
   register: out

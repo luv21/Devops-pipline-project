@@ -1,5 +1,5 @@
 ---
-- name: Adding environmental variables in bashrc
+- name: Adding environmental variables in/etc/bash.bashrc (System-wide)
   become: yes
   lineinfile:
     path: "/etc/bash.bashrc"
@@ -14,7 +14,7 @@
     - MONGO_IP=localhost
 
 
-- name: Adding environmental variables in bashrc
+- name: Adding environmental variables in /etc/environment
   become: yes
   lineinfile:
     path: "/etc/environment"
@@ -27,4 +27,3 @@
     - MONGO_USER="{{MO_USR}}"
     - MONGO_PASSWORD="{{MO_PASSWD}}"
     - MONGO_IP=localhost
-
