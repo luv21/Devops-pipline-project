@@ -7,7 +7,7 @@ const fs = require('fs');
 const scpSync = require('../lib/scp');
 const sshSync = require('../lib/ssh');
 
-exports.command = 'setup <file> <inventory>';
+exports.command = 'setup';
 exports.desc = 'Configures Jenkins and build Environment';
 exports.builder = yargs => {
     yargs.options({
@@ -21,34 +21,20 @@ exports.builder = yargs => {
             type: 'string',
             default: 'pipeline/password/jenkins',
             nargs: 1
-	},
-        file: {
-            alias: 'f',
-            describe: 'Inventory file for setup',
-            type: 'string',
-            default: 'pipeline/playbook.yml',
-            nargs: 1
-        },
-        inventory: {
-            alias: 'i',
-            describe: 'Inventory file for setup',
-            type: 'string',
-            default: 'pipeline/inventory.ini',
-            nargs: 1
-        },
+	}
 
     });
 };
 
 
 exports.handler = async argv => {
-    const { privateKey, vaultfilePath, file, inventory } = argv;
+    const { privateKey, vaultfilePath} = argv;
 
     (async () => {
 
         await run( privateKey );
-        if (fs.existsSync(path.resolve(file)) && fs.existsSync(path.resolve(inventory))) {
-            await jenkins_setup(file, inventory, vaultfilePath);
+        if (fs.existsSync(path.resolve('pipeline/playbook.yml')) && fs.existsSync(path.resolve('pipeline/inventory.ini'))) {
+            await jenkins_setup('pipeline/playbook.yml', 'pipeline/inventory.ini', vaultfilePath);
         }
 
         else {
@@ -82,7 +68,7 @@ async function run(privateKey) {
 
 }
 
-async function jenkins_setup(file, inventory, jenkinsUsername, jenkinsPassword, vaultfilePath, mongoUsername, mongoPassword) {
+async function jenkins_setup(file, inventory, vaultfilePath) {
     // the paths should be from root of pipeline directory
     // Transforming path of the files in host to the path in VM's shared folder
     let filePath = '/bakerx/'+ file;

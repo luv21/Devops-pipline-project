@@ -3,3 +3,6 @@ jenkins_plugins:
     version: "2.16"
   - name: matrix-auth
     version: "2.2"
+
+JK_USR: 'admin'
+JK_PASSWD: 'admin'
