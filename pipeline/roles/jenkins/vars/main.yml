@@ -3,6 +3,8 @@ jenkins_plugins:
     version: "2.16"
   - name: matrix-auth
     version: "2.2"
+  - name: build-pipeline-plugin
+    version: "1.5.8"
 
 JK_USR: 'admin'
 JK_PASSWD: 'admin'
