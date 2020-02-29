@@ -1,17 +1,17 @@
 ---
-- name: Adding environmental variables in/etc/bash.bashrc (System-wide)
-  become: yes
-  lineinfile:
-    path: "/etc/bash.bashrc"
-    insertbefore: 'BOF'
-    line: export "{{item}}"
-    state: present
-  with_items:
-    - APP_PORT=3002
-    - MONGO_PORT=27012
-    - MONGO_USER="{{MO_USR}}"
-    - MONGO_PASSWORD="{{MO_PASSWD}}"
-    - MONGO_IP=localhost
+# - name: Adding environmental variables in/etc/bash.bashrc (System-wide)
+#   become: yes
+#   lineinfile:
+#     path: "/etc/bash.bashrc"
+#     insertbefore: 'BOF'
+#     line: export "{{item}}"
+#     state: present
+#   with_items:
+#     - APP_PORT=3002
+#     - MONGO_PORT=27017
+#     - MONGO_USER="{{MO_USR}}"
+#     - MONGO_PASSWORD="{{MO_PASSWD}}"
+#     - MONGO_IP=localhost
 
 
 - name: Adding environmental variables in /etc/environment
@@ -19,11 +19,18 @@
   lineinfile:
     path: "/etc/environment"
     insertbefore: 'BOF'
-    line: export "{{item}}"
+    line: "export {{item}}"
     state: present
   with_items:
     - APP_PORT=3002
-    - MONGO_PORT=27012
-    - MONGO_USER="{{MO_USR}}"
-    - MONGO_PASSWORD="{{MO_PASSWD}}"
+    - MONGO_PORT=27017
+    - MONGO_USER={{MO_USR}}
+    - MONGO_PASSWORD={{MO_PASSWD}}
     - MONGO_IP=localhost
+  
+- name: Reload /etc/environment
+  become: yes
+  shell:
+    cmd: source /etc/environment
+  args:
+    executable: /bin/bash

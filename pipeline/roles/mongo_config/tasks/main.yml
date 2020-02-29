@@ -1,16 +1,16 @@
 ---
-- name: Changing mongo port to 27012
-  become: yes
-  replace:
-    path: /etc/mongod.conf
-    regexp: '27017'
-    replace: '27012'
+# - name: Changing mongo port to 27012
+#   become: yes
+#   replace:
+#     path: /etc/mongod.conf
+#     regexp: '27017'
+#     replace: '27012'
 
-- name: Restarting mongod service after changing the port to 27012
-  become: yes
-  systemd:
-    name: mongod.service
-    state: restarted
+# - name: Restarting mongod service after changing the port to 27012
+#   become: yes
+#   systemd:
+#     name: mongod.service
+#     state: restarted
 
 - name: Installing pip
   become: yes
@@ -26,7 +26,7 @@
 
 - name: Creating a user in mongodb
   mongodb_user:
-    login_port: '27012'
+    login_port: '27017'
     database: admin
     name: "{{MO_USR}}"
     password: "{{MO_PASSWD}}"

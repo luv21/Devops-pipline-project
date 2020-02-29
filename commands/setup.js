@@ -34,7 +34,6 @@ exports.handler = async argv => {
 
         await run( privateKey );
         if (fs.existsSync(path.resolve('pipeline/playbook.yml')) && fs.existsSync(path.resolve('pipeline/inventory.ini'))) {
-	    console.log("hi");
             await jenkins_setup('pipeline/playbook.yml', 'pipeline/inventory.ini', vaultfilePath);
         }
 
@@ -61,7 +60,6 @@ async function run(privateKey) {
     console.log(chalk.blueBright('Installing privateKey on configuration server'));
     let identifyFile = privateKey || path.join(os.homedir(), '.bakerx', 'insecure_private_key');
     result = scpSync (identifyFile, 'vagrant@192.168.33.10:/home/vagrant/.ssh/jk_rsa');
-    console.log(result)
     if( result.error ) { console.log(result.error); process.exit( result.status ); }
 
     console.log(chalk.blueBright('Running init script...'));
