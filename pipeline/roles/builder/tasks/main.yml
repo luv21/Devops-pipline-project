@@ -11,39 +11,6 @@
     name: python3-jenkins-job-builder
     state: present
 
-# - name: Setting master using a variable to hold a more complicate script
-#   set_fact:
-#     setmaster_mode: |
-#       import hudson.model.*
-#       import jenkins.model.*
-#       import jenkins.security.*
-#       import jenkins.security.apitoken.*
-      
-#       // script parameters
-#       def userName = 'admin'
-#       def tokenName = 'job'
-        
-#       def user = User.get(userName, false)
-#       def apiTokenProperty = user.getProperty(ApiTokenProperty.class)
-#       def result = apiTokenProperty.tokenStore.generateNewToken(tokenName)
-#       user.save()
-      
-#       return result.plainValue
-
-# - name: use the variable as the script
-#   jenkins_script:
-#     script: "{{setmaster_mode}}"
-#     user: admin
-#     password: admin
-#     url: http://192.168.33.20:9000
-#     args:
-#       jenkins_mode: Node.Mode.EXCLUSIVE
-#   register: data
-
-# - name: print data
-#   debug:
-#     msg: "{{data.output}}"
-
 - name: Get crumb
   uri:
     url: http://127.0.0.1:9000/crumbIssuer/api/json
@@ -51,11 +18,6 @@
     password: "{{JK_PASSWD}}"
     force_basic_auth: yes
   register: result
-
-# - name: print data
-#   debug:
-#     msg: "{{result}}"
-
 
 - name: Generate Access token
   uri:
@@ -90,24 +52,31 @@
     mode: 0755
     owner: jenkins
 
-- name: create a jenkins_jobs directory
-  become: yes
-  file:
-    path: /home/vagrant/jobs
-    state: directory
-    mode: '0755'
-
 - name: push the yml file
   become: yes
   template:
-    src: hello.yml.j2
-    dest: /home/vagrant/jobs/hello.yml
+    src: checkbox.yml.j2
+    dest: /var/lib/jenkins/jobs/hello.yml
     mode: 0755
     owner: jenkins
 
 - name: create job
   become: yes
-  shell: jenkins-jobs update jobs
-  
-  
-# curl 'http://192.168.33.20:9000/me/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken' --data 'newTokenName=kb-token' --user 'admin:admin'
+  shell: 
+    cmd: jenkins-jobs update jobs
+  args:
+    chdir: /var/lib/jenkins
+    
+- name: Trigger the build job
+  uri: 
+    url: http://127.0.0.1:9000/job/checkbox/build
+    method: POST
+    user: "{{JK_USR}}"
+    password: "{{JK_PASSWD}}"
+    body_format: form-urlencoded
+    body:
+      newTokenName: job
+      Jenkins-Crumb: "{{result.json.crumb}}"
+    force_basic_auth: yes
+    status_code: 201
+  register: token
