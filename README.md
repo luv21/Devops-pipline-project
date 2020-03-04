@@ -1,3 +1,7 @@
+# Project Report - Milestone-1
+
+In this milestone we have provisioned ansible server and jekins server
+
 # Checkpoint 1
 
 ## Process flow and Software practices
@@ -14,8 +18,6 @@ We have provided a CLI command `pipeline setup` which performs the following tas
 * Templates are been used to skip the setup wizard and handle authentication
 
 
-
-#
 
 # Scrum Meeting 1 - Date: 02/13/2020
 
@@ -61,6 +63,7 @@ The steps that we performed in the Checkpoint-2  are:
 * Installed nodejs and other variable dependencies like nginx.
 
 
+
 # Scrum Meeting 2 - Date: 02/20/2020
 
 ### Luv Khurana
@@ -78,7 +81,6 @@ The steps that we performed in the Checkpoint-2  are:
 * Changing ports for Mongodb
 
 
-
 ### Jayesh
 
 #### Tasks  
@@ -88,7 +90,46 @@ The steps that we performed in the Checkpoint-2  are:
 
 
 
+# Milestone-1
+
+## process flow
+
+The overview of steps that we performed in the Milestone are:
+
+* Installing the necessary apt packages such as pip, jenkins job builder, pm2
+
+* Acquire crumb to genrate Access token for Jenkins
+
+* Creating pipeline to install node modules, run the app, perform tests and teardown services
+
+
+# Scrum Meeting 3 - Date: 02/27/2020
+
+### Luv Khurana
+
+#### Tasks:
+
+* Installed nodejs
+* Update documentation and Readme
+
+### Venkata Sai
+
+#### Tasks
+
+* Created mongo user with password and readWrite role
+* Changing ports for Mongodb
+
+### Jayesh
+
+#### Tasks  
+
+* Installed Mongodb and other environment variables.
+* Updated source list and enabling Mongodb services.
+
+
 [checkpoint documentation](/checkpoint.md)
+
+
 
 
 
