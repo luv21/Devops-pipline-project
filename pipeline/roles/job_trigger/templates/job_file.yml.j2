@@ -1,0 +1,22 @@
+- job:
+    name: checkbox.io
+    defaults: global
+    project-type: pipeline
+    dsl: |
+        node {
+            stage('source'){
+                git 'https://github.com/chrisparnin/checkbox.io.git'
+            }
+            stage('Setting'){
+                sh 'npm install --prefix server-side/site/'
+            }
+            stage('change'){
+                sh 'pm2 start server-side/site/server.js'
+            }
+            stage('Test'){
+                sh 'npm test --prefix server-side/site/'
+            }
+            stage('Stop'){
+                sh 'pm2 stop  server-side/site/server.js'
+            }
+        }
