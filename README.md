@@ -4,6 +4,8 @@ In this milestone we have provisioned ansible server and jekins server with nece
 
 [checkpoint documentation](/checkpoint.md)
 
+[screencast link](https://drive.google.com/file/d/1oTsAS8ORqxpXihMtH61SJrlXxElgOpNT/view?usp=sharing)
+
 ## Instructions
 
 ### Building the Ansible and Jenkins server
