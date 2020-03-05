@@ -11,20 +11,6 @@
     name: python3-jenkins-job-builder
     state: present
 
-- name: Add ansible repo
-  become: yes
-  apt_repository:
-    repo: ppa:ansible/ansible
-    state: present
-    update_cache: yes
-
-- name: Install ansible
-  become: yes
-  apt:
-    name: ansible
-    state: latest
-    update_cache: yes
-
 - name: Install pm2
   become: yes
   npm:

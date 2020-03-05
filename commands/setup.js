@@ -1,3 +1,4 @@
+
 const child = require('child_process');
 const chalk = require('chalk');
 const path = require('path');
@@ -33,8 +34,8 @@ exports.handler = async argv => {
     (async () => {
 
         await run( privateKey );
-        if (fs.existsSync(path.resolve('pipeline/playbook.yml')) && fs.existsSync(path.resolve('pipeline/inventory.ini'))) {
-            await jenkins_setup('pipeline/playbook.yml', 'pipeline/inventory.ini', vaultfilePath);
+        if (fs.existsSync(path.resolve('pipeline/playbook_setup.yml')) && fs.existsSync(path.resolve('pipeline/inventory.ini'))) {
+            await jenkins_setup('pipeline/playbook_setup.yml', 'pipeline/inventory.ini', vaultfilePath);
         }
 
         else {

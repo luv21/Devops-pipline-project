@@ -150,6 +150,7 @@ The steps that we performed in the Checkpoint-2  are:
     └── mongo_var.yml
 ```
 
+
 # Scrum Meeting 2 - Date: 02/20/2020
 
 ### Luv Khurana
@@ -252,6 +253,8 @@ The pipeline has the following stages
 * Updated source list and enabling Mongodb services
 * Obtaining crumb and API token
 * logging Jenkins console output
+
+
 
 
 
