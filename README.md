@@ -194,13 +194,6 @@ The pipeline has the following stages
 
 5. Stop - tearing down the application
 
-The overview of steps that we performed in the Milestone are:
-
-* Installing the necessary apt packages such as pip, jenkins job builder, pm2
-
-* Acquire crumb to genrate Access token for Jenkins
-
-* Creating pipeline to install node modules, run the app, perform tests and teardown services
 
 ```bash
 .
