@@ -82,7 +82,7 @@ We have provided a CLI command `pipeline setup` which performs the following tas
     ├── jenkins_var.yml
 ```
 
-# Scrum Meeting 1 - Date: 02/13/2020
+## Scrum Meeting 1 - Date: 02/13/2020
 
 ### Luv Khurana
 
@@ -151,7 +151,7 @@ The steps that we performed in the Checkpoint-2  are:
 ```
 
 
-# Scrum Meeting 2 - Date: 02/20/2020
+## Scrum Meeting 2 - Date: 02/20/2020
 
 ### Luv Khurana
 
@@ -225,7 +225,7 @@ The pipeline has the following stages
 ```
 
 
-# Scrum Meeting 3 - Date: 02/27/2020
+## Scrum Meeting 3 - Date: 02/27/2020
 
 ### Luv Khurana
 
@@ -253,15 +253,3 @@ The pipeline has the following stages
 * Updated source list and enabling Mongodb services
 * Obtaining crumb and API token
 * logging Jenkins console output
-
-
-
-
-
-
-
-
-
-
-
-

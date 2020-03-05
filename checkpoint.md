@@ -38,7 +38,7 @@
 <br/><br/>
 
 
-#### Sprint Summary Planning Checkpoint-1;
+#### Sprint Summary Planning Checkpoint-1
 
 * Setting up Infrastructure
 * Configuring Jenkins setup, authentication
@@ -114,7 +114,7 @@
 
 
 
-## user stories checkpoint-3
+## User Stories checkpoint-3
 
 
 | Checkpoint | Issue Number | Issue Name                  | Task                                           | Created/Updated | Estimate | Assignees         | Completed   |
