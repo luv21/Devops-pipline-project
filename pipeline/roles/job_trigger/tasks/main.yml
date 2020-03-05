@@ -109,7 +109,7 @@
     force_basic_auth: yes
   register: latest_job_non_null
   until: latest_job_non_null.json.lastCompletedBuild > 0
-  retries: 10
+  retries: 50
   delay: 10
   
 
@@ -129,7 +129,7 @@
     force_basic_auth: yes
   register: latest_job_after_trigger
   until: latest_job_after_trigger.json.lastCompletedBuild.number==latest_job_before.json.nextBuildNumber
-  retries: 10
+  retries: 50
   delay: 10
 
 # - debug: 
